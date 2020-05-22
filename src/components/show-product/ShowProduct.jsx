@@ -18,11 +18,15 @@ function ShowProduct(props) {
     const [getWishList, setWishList] = useState({ wishList: [] })
     const [getDataLength, setDataLength] = useState({ length: 0 })
     const [open, setOpen] = React.useState(false);
-   
+   const [dummy,setDummy] = useState({length:0})
 
 
     let getProductName = (event) => {
-        
+        setDummy(
+            {
+                length:1
+            }
+        )
         if (event.length !== 0) {
             let data = getData.allData
 
@@ -284,7 +288,7 @@ function ShowProduct(props) {
             <Search getProductName={getProductName} />
 
             {conection ? <Progress /> : null}
-            {(getText.text.length>0)?getText.text.map((value, index) => {
+            {(dummy.length>0)?getText.text.map((value, index) => {
 
                 return (
                     <div className="container">

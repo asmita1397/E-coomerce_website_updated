@@ -111,7 +111,7 @@ function ShowProduct(props) {
     }, [])
     let changeColor = (selected) => {
 
-        let data = getText.text
+        let data =initialLength.length?getText.text:getData.allData
         data.map(item => {
 
 
@@ -141,6 +141,7 @@ function ShowProduct(props) {
         saveCart(selected)
 
     }
+    
     let saveCart = async (wishData) => {
         let userIdl = localStorage.getItem("userId")
 
@@ -200,7 +201,7 @@ function ShowProduct(props) {
                     const response = await Axios.post(url, formData)
                     if (response.status === 200) {
 
-                        let datas = getText.text
+                        let datas = initialLength.length? getText.text :getData.allData
 
                         datas.map(item => {
                             if (item.id === data.id) {
@@ -288,7 +289,7 @@ function ShowProduct(props) {
             <Search getProductName={getProductName} />
 
             {conection ? <Progress /> : null}
-            { (initialLength.length > 0) ? getText.text.map((value, index) => {
+            {(initialLength.length > 0) ? getText.text.map((value, index) => {
 
                 return (
                     <div className="container">
@@ -305,7 +306,26 @@ function ShowProduct(props) {
                 )
 
 
-            }):null }
+            }) : getData.allData.map((value, index) => {
+
+                return (
+                    <>
+                       
+                        <div className="container">
+                            <DisplayItem
+
+                                done={value.done}
+                                addToCart={addToCart}
+                                changeColor={changeColor} key={value + index}
+                                text={value}
+                            />
+
+                        </div>
+                    </>
+                )
+
+
+            })}
             <CustomizedSnackbars open={open} />
 
         </>

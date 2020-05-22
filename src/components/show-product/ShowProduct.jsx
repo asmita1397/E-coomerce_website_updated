@@ -13,18 +13,18 @@ function ShowProduct(props) {
     }
 
     const [getData, setData] = useState(productData)
-    const [getText, setText] = useState({ text: [] })
+    const [getText, setText] = useState({ text: []})
     const [conection, setConection] = useState(true)
     const [getWishList, setWishList] = useState({ wishList: [] })
     const [getDataLength, setDataLength] = useState({ length: 0 })
     const [open, setOpen] = React.useState(false);
-   const [initialLength,setinitialLength] = useState({length:0})
+    const [initialLength, setinitialLength] = useState({ length: 0 })
 
 
     let getProductName = (event) => {
         setinitialLength(
             {
-                length:1
+                length: 1
             }
         )
         if (event.length !== 0) {
@@ -52,7 +52,7 @@ function ShowProduct(props) {
                 })
             }
         }
-       
+
     }
 
     let getAllAccount = async () => {
@@ -68,8 +68,8 @@ function ShowProduct(props) {
             //     }
             // }
             let response = await Axios.get(url)
-            console.log(response);
-            
+            console.log(response.data);
+           
             const wishUrl = 'https://react-shoping-cart-66dac.firebaseio.com/wish-list/' + userId + '.json'
             let wishResponse = await Axios.get(wishUrl)
             let newData = []
@@ -139,7 +139,7 @@ function ShowProduct(props) {
         })
 
         saveCart(selected)
-        
+
     }
     let saveCart = async (wishData) => {
         let userIdl = localStorage.getItem("userId")
@@ -284,11 +284,11 @@ function ShowProduct(props) {
 
     return (
         <>
-        {console.log("data"+getData.allData)}
+            {console.log("data" + getData.allData)}
             <Search getProductName={getProductName} />
 
             {conection ? <Progress /> : null}
-            {(initialLength.length>0)?getText.text.map((value, index) => {
+            { (initialLength.length > 0) ? getText.text.map((value, index) => {
 
                 return (
                     <div className="container">
@@ -305,24 +305,7 @@ function ShowProduct(props) {
                 )
 
 
-            }):getData.allData.map((value, index) => {
-
-                return (
-                    <div className="container">
-                        <DisplayItem
-
-                            done={getText.done}
-                            addToCart={addToCart}
-                            changeColor={changeColor} key={value + index}
-                            text={value}
-                        />
-
-                    </div>
-
-                )
-
-
-            })}
+            }):null }
             <CustomizedSnackbars open={open} />
 
         </>

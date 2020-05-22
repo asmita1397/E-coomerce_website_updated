@@ -35,7 +35,7 @@ export default function DisplayItem(props) {
 
                 </div>
                 <div className="view overlay">
-                    <img className="card-img-top" width="60%" height="160px" src={props.text.image} alt='c' />
+                    <img className="card-img-top" width="60%" height="160px" src={props.text.image} alt='not found' />
 
                 </div>
 
